@@ -1,0 +1,60 @@
+class MyStack {
+
+    private LinkedList<Integer> A = new LinkedList<>();
+        private LinkedList<Integer> B = new LinkedList<>();
+        
+        /** Push element x onto stack. */
+        public void push(int x) {
+            //入栈就插入A队列
+            A.offer(x);//不抛异常的
+        }
+
+        /** Removes the element on top of the stack and returns that element. */
+        public int pop() {
+            //出栈就放到B队列
+            //需要先将A中元素导向B中元素，直到A中只剩一个元素
+            //最后互换 A 和 B
+            if (A.isEmpty()) {
+                //空栈直接返回0
+                return 0;
+            }
+            while (A.size() > 1) {
+                int cur = A.removeFirst();
+                B.addLast(cur);//A元素插到B中
+                
+            }
+            int ret = A.removeFirst();
+            swap();
+            return ret;
+            
+        }
+        
+        private void swap() {
+            LinkedList<Integer> tmp = A;
+            A = B;
+            B = tmp;
+        }
+
+        /** Get the top element. */
+        public int top() {
+            //全都出到B中，直到A中有一个元素，就是栈顶元素
+            if (A.isEmpty()) {
+                //空栈直接返回0
+                return 0;
+            }
+            while (A.size() > 1) {
+                int cur = A.removeFirst();
+                B.addLast(cur);//A元素插到B中
+
+            }
+            int ret = A.removeFirst();
+            B.addLast(ret);
+            swap();
+            return ret;
+        }
+
+        /** Returns whether the stack is empty. */
+        public boolean empty() {
+            return A.isEmpty();
+        }
+}
