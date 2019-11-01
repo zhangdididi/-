@@ -1,0 +1,35 @@
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            //遇到左括号入栈
+            char c = s.charAt(i);
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+                continue;
+            }
+            //遇到右括号，取栈顶元素比较是否匹配
+            if (stack.isEmpty()) {
+                return false;
+            }
+            char top = stack.pop();
+            if (top == '(' && c == ')') {
+                continue;
+            }
+            if (top == '[' && c == ']') {
+                continue;
+            }
+            if (top == '{' && c == '}') {
+                continue;
+            }
+            
+            //程序到这里说明以上条件都不满足，返回false
+            return false;
+        }
+        //遍历完栈为空，返回true
+        if (stack.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+}
