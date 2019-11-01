@@ -1,0 +1,32 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (numRows <= 0) {
+            return res;
+        }
+        List<Integer> firstLine = new ArrayList<>();
+        firstLine.add(1);
+        res.add(firstLine);
+        if (numRows == 1) {
+            return res;
+        }
+        List<Integer> secondLine = new ArrayList<>();
+        secondLine.add(1);
+        secondLine.add(1);
+        res.add(secondLine);
+        if (numRows == 2) {
+            return res;
+        }
+        for (int i = 2; i < numRows; i++) {
+            List<Integer> prevLine = res.get(i - 1);
+            List<Integer> indexLine = new ArrayList<>();
+            indexLine.add(1);
+            for (int j = 1; j < i; j++) {
+                indexLine.add(prevLine.get(j - 1) + prevLine.get(j));
+            }
+            indexLine.add(1);
+            res.add(indexLine);
+        }
+        return res;
+    }
+}
