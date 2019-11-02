@@ -1,0 +1,42 @@
+class MinStack {
+
+    /** initialize your data structure here. */
+    
+    int minNum;
+    List<Integer> minStack = new ArrayList<>();
+
+    //压栈
+    public void push(int x) {
+        minStack.add(x);
+        if (minStack.size() == 1) {
+            //只有一个元素，这个元素就为最小
+            minNum = minStack.get(0);
+        }
+        minNum = Math.min(minNum, x);
+    }
+
+    //出栈
+    public void pop() {
+        if (minStack.size() == 0) {
+            return;
+        }
+
+        //如果出栈的是最小元素，则要从栈内元素中再找最小的值
+        if (minNum == minStack.get(minStack.size() - 1)) {
+            minNum = minStack.get(0);
+            for (int i = 1; i < minStack.size() - 1; i++) {
+                minNum = Math.min(minNum, minStack.get(i));
+            }
+        }
+        minStack.remove(minStack.size() - 1);
+
+    }
+
+    public int top() {
+        return minStack.get(minStack.size() - 1);
+    }
+
+    public int getMin() {
+        return minNum;
+    }
+}
