@@ -1,7 +1,5 @@
 class MinStack {
 
-    /** initialize your data structure here. */
-    
     int minNum;
     List<Integer> minStack = new ArrayList<>();
 
@@ -31,11 +29,13 @@ class MinStack {
         minStack.remove(minStack.size() - 1);
 
     }
-
+    
+    //取栈顶元素
     public int top() {
         return minStack.get(minStack.size() - 1);
     }
 
+    //给出最小值
     public int getMin() {
         return minNum;
     }
