@@ -22,6 +22,7 @@ class MinStack {
         //如果出栈的是最小元素，则要从栈内元素中再找最小的值
         if (minNum == minStack.get(minStack.size() - 1)) {
             minNum = minStack.get(0);
+            //循环找到最小值出栈以后栈中的最小值
             for (int i = 1; i < minStack.size() - 1; i++) {
                 minNum = Math.min(minNum, minStack.get(i));
             }
